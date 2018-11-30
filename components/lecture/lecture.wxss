@@ -1,0 +1,42 @@
+/* utils/components/lecture.wxss */
+
+.lecture-card {
+  margin: 20rpx;
+  border: lightgray 1px solid;
+  border-radius: 3px;
+  width: 95%;
+  text-align: center;
+  box-shadow: 1px 1px 1px lightgray;
+}
+
+.top-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #999;
+  margin: 10rpx 20rpx;
+}
+
+.time-info {
+  left: 0;
+}
+
+.title-info {
+  margin: 60rpx 10rpx;
+  font-weight: bold;
+}
+
+.link-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 5rpx 20rpx;
+}
+
+.link-info button {
+  font-size: 12px;
+  line-height: 2em;
+}
+
+.link-info-right button {
+  margin-left: 10rpx;
+}

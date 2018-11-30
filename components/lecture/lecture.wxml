@@ -1,0 +1,18 @@
+<!--utils/components/lecture.wxml-->
+
+<view class='lecture-card'>
+  <view class='top-info'>
+    <text class='time-info'>{{lectInfo.time}}</text>
+    <text class='class-info'>@{{lectInfo.classroom}}</text>
+  </view>
+  <view class='title-info'>{{lectInfo.title}}</view>
+  <view class='link-info'>
+    <view class='link-info-left'>
+      <button class='link-btn btn-info' size='mini' plain bindtap='gotoInfoUrl(lectInfo.url)'>详情</button>
+    </view>
+    <view class='link-info-right'>
+      <button class='link-btn btn-sign-up' size='mini' bindtap='gotoSignUpUrl(lectInfo.id)'>报名</button>
+      <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl(lectInfo.id)'>签到</button>
+    </view>
+  </view>
+</view>
