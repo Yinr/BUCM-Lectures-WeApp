@@ -36,22 +36,35 @@ Component({
   methods: {
     gotoSignUpUrl() {
       let url = 'https://bucmedu.wjx.cn/jq/' + this.data.lectInfo.id + '.aspx';
-      console.log(url);
+      wx.showToast({
+        title: url,
+        icon: 'none',
+      });
     },
     gotoSignInUrl() {
       let url = 'https://bucmedu.wjx.cn/app/checkin.aspx?activity=' + this.data.lectInfo.id;
-      console.log(url);
+      wx.showToast({
+        title: url,
+        icon: 'none',
+      });
     },
     gotoInfoUrl() {
       let url = this.data.lectInfo.url;
-      console.log(url);
+      wx.showToast({
+        title: url,
+        icon: 'none',
+      });
     },
     gotoClassroomUrl() {
       let url = 'https://class.yinr.cc/classroom/#' + this.data.lectInfo.classroom;
       if (this.data.lectInfo.classroom.length == 0) {
         url = "";
+      } else {
+        wx.showToast({
+          title: url,
+          icon: 'none',
+        });
       }
-      console(url);
     },
     isOutTime(strTime) {
       var lectEndTime = new Date(strTime);
