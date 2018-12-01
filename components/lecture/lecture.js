@@ -1,4 +1,6 @@
 // utils/components/lecture.js
+var utils = require("../../utils/util.js")
+
 Component({
   /**
    * 组件的属性列表
@@ -13,30 +15,43 @@ Component({
    * 组件的初始数据
    */
   data: {
+    formatedTime: "",
+    isDuring: false,
+    isOut: false
+  },
 
+  lifetimes: {
+    attached() {
+      this.setData({
+        formatedTime: utils.formatTime(new Date(this.data.lectInfo.time)),
+        isDuring: this.isDuringTime(this.data.lectInfo.time),
+        isOut: this.isOutTime(this.data.lectInfo.time)
+      })
+    }
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    gotoSignUpUrl(id) {
-      var url = 'https://bucmedu.wjx.cn/jq/' + id + '.aspx';
-      return url;
+    gotoSignUpUrl() {
+      let url = 'https://bucmedu.wjx.cn/jq/' + this.data.lectInfo.id + '.aspx';
+      console.log(url);
     },
-    gotoSignInUrl(id) {
-      var url = 'https://bucmedu.wjx.cn/app/checkin.aspx?activity=' + id;
-      return url;
+    gotoSignInUrl() {
+      let url = 'https://bucmedu.wjx.cn/app/checkin.aspx?activity=' + this.data.lectInfo.id;
+      console.log(url);
     },
-    gotoInfoUrl(url) {
-      console.log(url)
+    gotoInfoUrl() {
+      let url = this.data.lectInfo.url;
+      console.log(url);
     },
-    gotoClassroomUrl(classroom) {
-      var url = 'https://class.yinr.cc/classroom/#' + classroom;
-      if (classroom.length == 0) {
+    gotoClassroomUrl() {
+      let url = 'https://class.yinr.cc/classroom/#' + this.data.lectInfo.classroom;
+      if (this.data.lectInfo.classroom.length == 0) {
         url = "";
       }
-      return url;
+      console(url);
     },
     isOutTime(strTime) {
       var lectEndTime = new Date(strTime);
