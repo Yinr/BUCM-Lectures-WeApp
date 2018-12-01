@@ -1,6 +1,6 @@
 <!--utils/components/lecture.wxml-->
 
-<view class='lecture-card'>
+<view class='lecture-card {{isOut?"lecture-out":""}}'>
   <view class='top-info'>
     <text class='time-info'>{{formatedTime}}</text>
     <text class='class-info' bindtap='gotoClassromUrl'>@{{lectInfo.classroom}}</text>
