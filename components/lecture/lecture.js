@@ -68,15 +68,15 @@ Component({
     },
     isOutTime(strTime) {
       var lectEndTime = new Date(strTime);
-      lectEndTime.setHours(lectEndTime.getHours() + 4);
+      lectEndTime.setHours(22);
       var now = new Date();
       return now > lectEndTime;
     },
     isDuringTime(strTime) {
       var lectTime = new Date(strTime);
       var lectEndTime = new Date(lectTime);
-      lectEndTime.setHours(lectTime.getHours() + 4);
-      lectTime.setHours(lectTime.getHours() - 1);
+      lectEndTime.setHours(22);
+      lectTime.setHours(0, -30);
       var now = new Date();
       return now >= lectTime && now <= lectEndTime;
     }
