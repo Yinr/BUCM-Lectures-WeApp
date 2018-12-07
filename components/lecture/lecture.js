@@ -35,11 +35,10 @@ Component({
    */
   methods: {
     gotoSignUpUrl() {
-      let url = 'https://bucmedu.wjx.cn/jq/' + this.data.lectInfo.id + '.aspx';
-      wx.showToast({
-        title: url,
-        icon: 'none',
-      });
+      wx.navigateToMiniProgram({
+        appId: 'wxd947200f82267e58',
+        path: 'pages/wjxqList/wjxqList?activityId=' + this.data.lectInfo.id,
+      })
     },
     gotoSignInUrl() {
       let url = 'https://bucmedu.wjx.cn/app/checkin.aspx?activity=' + this.data.lectInfo.id;
