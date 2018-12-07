@@ -12,6 +12,7 @@
 .lecture-out {
   background: linear-gradient(45deg, transparent 49.5%, lightgray 49.5%, lightgray 50.5%, transparent 50.5%);
   background-size: 5px 5px;
+  box-shadow: 0.5px 0.5px 0.5px rgba(211, 211, 211, 0.5);
 }
 
 .top-info {
