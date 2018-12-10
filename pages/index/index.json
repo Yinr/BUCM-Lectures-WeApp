@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "lecture-item": "/components/lecture/lecture"
-  }
+  },
+  "enablePullDownRefresh": true
 }

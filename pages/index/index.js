@@ -7,6 +7,15 @@ Page({
     lectures: null
   },
   onLoad() {
+    this.updateData()
+  },
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading()
+    this.updateData()
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
+  },
+  updateData() {
     let that = this;
     wx.request({
       url: 'https://lectures.yinr.cc/data/lectures.json',

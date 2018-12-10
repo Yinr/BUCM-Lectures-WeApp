@@ -3,7 +3,8 @@
     "pages/index/index"
   ],
   "window":{
-    "backgroundTextStyle":"light",
+    "backgroundColor": "#eee",
+    "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "BUCM Lectures",
     "navigationBarTextStyle":"black"
