@@ -8,6 +8,7 @@ Page({
   },
   onLoad() {
     this.updateData()
+    wx.showShareMenu({})
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
