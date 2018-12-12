@@ -7,13 +7,17 @@ Page({
     lectures: null
   },
   onLoad() {
+    wx.showLoading({
+      title: '讲座数据加载中...',
+    })
+  },
+  onReady() {
     this.updateData()
+    wx.hideLoading()
     wx.showShareMenu({})
   },
   onPullDownRefresh() {
-    wx.showNavigationBarLoading()
     this.updateData()
-    wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
   },
   updateData() {
@@ -21,11 +25,14 @@ Page({
     wx.request({
       url: 'https://lectures.yinr.cc/data/lectures.json',
       success(res) {
-        that.setData({
-          lectures: res.data.sort(
-            (a, b) => (new Date(b.time)) - (new Date(a.time))
-          )
-        })
+        let newLectures = res.data.sort(
+          (a, b) => (new Date(b.time)) - (new Date(a.time))
+        )
+        if (that.data.lectures != newLectures) {
+          that.setData({
+            lectures: newLectures,
+          })
+        }
       },
     })
   }
