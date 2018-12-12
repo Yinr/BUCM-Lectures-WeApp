@@ -5,7 +5,9 @@
     <text class='time-info'>{{formatedTime}}</text>
     <text class='class-info' bindtap='gotoClassroomUrl'>@{{lectInfo.classroom}}</text>
   </view>
+
   <view class='title-info'>{{lectInfo.title}}</view>
+
   <view class='link-info'>
     <view class='link-info-left'>
       <button class='link-btn btn-info' size='mini' plain bindtap='gotoInfoUrl'>详情</button>
@@ -13,6 +15,13 @@
     <view class='link-info-right'>
       <button class='link-btn btn-sign-up' size='mini' type='{{showSignIn ? "default" : "primary"}}' bindtap='gotoSignUpUrl' disabled='{{isOut}}'>报名</button>
       <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{showSignIn}}">签到</button>
+    </view>
+  </view>
+
+  <view class='qr-container' style='height: {{showQr ? qrHeight : "0"}}; opacity: {{showQr ? 1 : 0}};'>
+    <view class='qr-subcontainer' wx:if="{{showQr}}" bindtap='previewImg'>
+      <canvas canvas-id='{{qrId}}'></canvas>
+      <!-- <image src='{{imagePath}}' bindtap='previewImg'></image> -->
     </view>
   </view>
 </view>

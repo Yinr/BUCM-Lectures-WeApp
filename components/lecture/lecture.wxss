@@ -7,6 +7,7 @@
   box-shadow: 1px 1px 1px lightgray;
   text-align: center;
   font-size: medium;
+  transition: all 3s ease-in-out;
 }
 
 .lecture-out {
@@ -49,4 +50,18 @@
 
 .btn-info {
   color: #576b95;
+}
+
+.qr-container {
+  border-top: lightgrey 1px dashed;
+  transition: all 0.5s ease-in-out;
+}
+
+.qr-subcontainer {
+  margin: 10px;
+}
+
+.qr-container canvas {
+  width: 200px;
+  height: 200px;
 }
