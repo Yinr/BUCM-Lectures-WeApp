@@ -7,7 +7,11 @@ Component({
    */
   properties: {
     lectInfo: {
-      type: Object
+      type: Object,
+    },
+    showSignIn: {
+      type: Boolean,
+      value: false,
     }
   },
 
@@ -17,7 +21,7 @@ Component({
   data: {
     formatedTime: "",
     isDuring: false,
-    isOut: false
+    isOut: false,
   },
 
   lifetimes: {

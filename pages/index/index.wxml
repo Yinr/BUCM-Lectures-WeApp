@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <scroll-view>
-    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}">
+    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}">
     </lecture-item>
   </scroll-view>
 </view>

@@ -4,7 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    lectures: null
+    lectures: null,
+    showSignIn: false,
   },
   onLoad() {
     wx.showLoading({
