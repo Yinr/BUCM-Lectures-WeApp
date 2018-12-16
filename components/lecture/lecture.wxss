@@ -53,15 +53,12 @@
 }
 
 .qr-container {
+  padding: 2px;
   border-top: lightgrey 1px dashed;
   transition: all 0.5s ease-in-out;
 }
 
-.qr-subcontainer {
-  margin: 10px;
-}
-
-.qr-container canvas {
+.qr-image {
   width: 200px;
   height: 200px;
 }

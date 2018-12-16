@@ -1,11 +1,16 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const QR = require("../../utils/qrcode.js")
 
 Page({
   data: {
-    lectures: null,
+    lectures: {},
     showSignIn: false,
+    tmpCanvasId: "tmp-canvas",
+    cavDisplay: false,
+    cavW: 200,
+    cavH: 200,
   },
   onLoad() {
     wx.showLoading({
@@ -36,5 +41,31 @@ Page({
         }
       },
     })
+  },
+  qrUrl(e) {
+    var that = this;
+    var qrUrl = e.detail.url,
+      context = e.detail.that,
+      canvasId = that.data.tmpCanvasId;
+
+    that.setData({
+      cavDisplay: true,
+    });
+
+    QR.qrApi.draw(
+      qrUrl,
+      canvasId,
+      that,
+      that.data.cavW,
+      that.data.cavH,
+      (url) => {
+        context.setData({
+          imagePath: url,
+        });
+        that.setData({
+          cavDisplay: false,
+        });
+      }
+    );
   }
 })

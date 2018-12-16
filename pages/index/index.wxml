@@ -1,7 +1,8 @@
 <!--index.wxml-->
 <view class="container">
   <scroll-view>
-    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}">
+    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl">
     </lecture-item>
   </scroll-view>
+  <canvas id="tmp-canvas" canvas-id='{{tmpCanvasId}}' wx:if='{{cavDisplay}}'></canvas>
 </view>

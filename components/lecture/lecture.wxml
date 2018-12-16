@@ -18,10 +18,7 @@
     </view>
   </view>
 
-  <view class='qr-container' style='height: {{showQr ? qrHeight : "0"}}; opacity: {{showQr ? 1 : 0}};'>
-    <view class='qr-subcontainer' wx:if="{{showQr}}" bindtap='previewImg'>
-      <canvas canvas-id='{{qrId}}'></canvas>
-      <!-- <image src='{{imagePath}}' bindtap='previewImg'></image> -->
-    </view>
+  <view class='qr-container' style='height: {{showQr ? "200px" : "0"}}; opacity: {{showQr ? 1 : 0}}; padding: {{showQr ? "" : 0}}'>
+    <image src='{{imagePath}}' class='qr-image' wx:if="{{showQr}}" bindtap='previewImg'></image>
   </view>
 </view>
