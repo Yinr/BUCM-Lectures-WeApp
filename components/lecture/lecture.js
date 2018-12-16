@@ -46,7 +46,12 @@ Component({
         path: 'pages/wjxqList/wjxqList?activityId=' + this.data.lectInfo.id,
       })
     },
-    gotoSignInUrl() {
+    gotoSignInUrl(event) {
+      if (event.type == "longpress") {
+        this.setData({
+          imagePath: "",
+        })
+      }
       let url = 'https://bucmedu.wjx.cn/app/checkin.aspx?activity=' + this.data.lectInfo.id + '#';
       if (!this.data.showQr) {
         if (this.data.imagePath == "") {

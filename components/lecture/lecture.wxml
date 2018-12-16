@@ -14,7 +14,7 @@
     </view>
     <view class='link-info-right'>
       <button class='link-btn btn-sign-up' size='mini' type='{{showSignIn ? "default" : "primary"}}' bindtap='gotoSignUpUrl' disabled='{{isOut}}'>报名</button>
-      <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{showSignIn}}">签到</button>
+      <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' bindlongpress='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{showSignIn}}">签到</button>
     </view>
   </view>
 
