@@ -1,6 +1,13 @@
 <!--index.wxml-->
 <view class="container">
-  <scroll-view>
+  <view class="top-info">
+    <view class='user-info' wx:if="{{logined}}">
+      <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+      <open-data class="user-nickname" type="userNickName"></open-data>
+    </view>
+    <button class='login-button' wx:else type='primary' plain='true' open-type='getUserInfo' bindgetuserinfo='login'>登录</button>
+  </view>
+  <scroll-view scroll-y="true" enable-back-to-top="true" style='height: {{windowHeight - 50}}px'>
     <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl">
     </lecture-item>
   </scroll-view>
