@@ -6,10 +6,32 @@ Page({
   data: {
     lectures: null,
     showSignIn: false,
+    logined: false,
+    windowHeight: 0,
   },
   onLoad() {
+    var that = this
     wx.showLoading({
       title: '讲座数据加载中...',
+    })
+    wx.getSystemInfo({
+      success(res) {
+        var windowHeight = res.windowHeight
+        that.setData({
+          windowHeight: windowHeight,
+        })
+      },
+    })
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success(res) {
+              that.updateUserInfo(res.userInfo.nickName)
+            }
+          })
+        }
+      },
     })
   },
   onReady() {
@@ -21,6 +43,7 @@ Page({
     this.updateData()
     wx.stopPullDownRefresh()
   },
+
   updateData() {
     let that = this;
     wx.request({
@@ -36,5 +59,22 @@ Page({
         }
       },
     })
+  },
+  login(e) {
+    var userInfo = e.detail.userInfo
+    var nickName = userInfo.nickName
+    this.updateUserInfo(nickName)
+  },
+  updateUserInfo(nickName) {
+    var that = this
+    var authUser = this.isAuthUser(nickName)
+    this.setData({
+      logined: true,
+      showSignIn: authUser,
+    })
+  },
+  isAuthUser(nickName) {
+    let allowedUser = ['Yinr', '梳子agnes', '梳几']
+    return allowedUser.includes(nickName)
   }
 })
