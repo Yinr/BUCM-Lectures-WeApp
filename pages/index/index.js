@@ -106,7 +106,7 @@ Page({
     })
   },
   isAuthUser(nickName) {
-    let allowedUser = ['Yinr', '梳子agnes', '梳几']
+    let allowedUser = ['Yinr', '梳子Agnes', '梳几']
     return allowedUser.includes(nickName)
   },
 })
