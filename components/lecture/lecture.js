@@ -64,11 +64,30 @@ Component({
       })
     },
     gotoInfoUrl() {
-      let url = this.data.lectInfo.url;
-      wx.showToast({
-        title: url,
-        icon: 'none',
-      });
+      let url = "https://r.xiumi.us/stage/v5/37Dxv/" + this.data.lectInfo.infoId;
+
+      wx.request({
+        url: url,
+        method: 'GET',
+        dataType: 'html',
+        responseType: 'text',
+        success(res) {
+          if (res.statusCode == 200) {
+            const info = /injectedData.showInfo *= *JSON.parse\(decodeURIComponent\("([^"]*)"\)\);/
+            var infoRes = info.exec(res.data)
+            infoRes = JSON.parse(decodeURIComponent(infoRes[1]))
+            var infoDesc = infoRes.desc
+            var infoUrl = "https:" + infoRes.show_data_url
+
+            wx.showToast({
+              title: infoDesc,
+              icon: 'none',
+            });
+          } else {
+            console.log({ info: "lecture info request " + res.statusCode, err: res })
+          }
+        },
+      })
     },
     gotoClassroomUrl() {
       let url = 'https://class.yinr.cc/classroom/#' + this.data.lectInfo.classroom;
