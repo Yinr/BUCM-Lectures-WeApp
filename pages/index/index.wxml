@@ -7,7 +7,8 @@
     </view>
     <button class='login-button' wx:else type='primary' plain='true' open-type='getUserInfo' bindgetuserinfo='login'>登录</button>
   </view>
-  <scroll-view scroll-y="true" enable-back-to-top="true" style='height: {{windowHeight - 50}}px'>
+  <scroll-view class='lectures-list' scroll-y="true" enable-back-to-top="true" style='height: {{windowHeight}}px'>
+    <view class='placeholder'></view>
     <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl">
     </lecture-item>
   </scroll-view>
