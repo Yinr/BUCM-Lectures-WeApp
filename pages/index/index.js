@@ -44,6 +44,8 @@ Page({
     this.updateData()
     wx.hideLoading()
     wx.showShareMenu({})
+  },
+  onShow() {
     this.updateFullTipText()
   },
   onPullDownRefresh() {
