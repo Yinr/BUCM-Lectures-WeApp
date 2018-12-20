@@ -41,11 +41,15 @@
   width: 100%;
 }
 
-.no-data-tip {
+.bottom-tip {
   text-align: center;
-  margin: 10px;
-  color: #888888;
+  margin: 5px;
+  color: lightgrey;
   font-size: 12px;
+}
+
+.full-tip {
+  border-top: 1px dashed lightgrey;
 }
 
 #tmp-canvas {

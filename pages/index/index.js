@@ -13,6 +13,7 @@ Page({
     cavH: 200,
     logined: false,
     windowHeight: 0,
+    fullTipText: "",
   },
   onLoad() {
     var that = this
@@ -43,6 +44,7 @@ Page({
     this.updateData()
     wx.hideLoading()
     wx.showShareMenu({})
+    this.updateFullTipText()
   },
   onPullDownRefresh() {
     this.updateData()
@@ -109,4 +111,17 @@ Page({
     let allowedUser = ['Yinr', '梳子Agnes', '梳几']
     return allowedUser.includes(nickName)
   },
+
+  updateFullTipText(text) {
+    let textList = [
+      "到底啦！到底啦！",
+      "别拉了别拉了，已经都给你看光了嘛~",
+      "人家是有底线的~",
+      "上拉是没有刷新的啦~",
+    ]
+    let selectedText = textList[Math.floor(Math.random() * textList.length)]
+    this.setData({
+      fullTipText: selectedText,
+    })
+  }
 })
