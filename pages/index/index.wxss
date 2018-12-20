@@ -41,6 +41,13 @@
   width: 100%;
 }
 
+.no-data-tip {
+  text-align: center;
+  margin: 10px;
+  color: #888888;
+  font-size: 12px;
+}
+
 #tmp-canvas {
   z-index: -1;
   width: 200px;

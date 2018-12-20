@@ -5,7 +5,7 @@ const QR = require("../../utils/qrcode.js")
 
 Page({
   data: {
-    lectures: {},
+    lectures: [],
     showSignIn: false,
     tmpCanvasId: "tmp-canvas",
     cavDisplay: false,

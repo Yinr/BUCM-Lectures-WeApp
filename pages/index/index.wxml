@@ -9,8 +9,10 @@
   </view>
   <scroll-view class='lectures-list' scroll-y="true" enable-back-to-top="true" style='height: {{windowHeight}}px'>
     <view class='placeholder'></view>
-    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl">
-    </lecture-item>
+    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl" />
+    <view wx:if="{{lectures.length == 0}}" class='no-data-tip'>
+      <text>暂时没有找到讲座数据哦，下拉刷新一下？</text>
+    </view>
   </scroll-view>
   <canvas id="tmp-canvas" canvas-id='{{tmpCanvasId}}' wx:if='{{cavDisplay}}'></canvas>
 </view>
