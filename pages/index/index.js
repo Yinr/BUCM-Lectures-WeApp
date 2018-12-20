@@ -65,6 +65,27 @@ Page({
           that.setData({
             lectures: newLectures,
           })
+          wx.setStorage({
+            key: 'lectures',
+            data: newLectures,
+          })
+        }
+      },
+      fail(res) {
+        if (that.data.lectures.length == 0) {
+          wx.showToast({
+            //TODO: use top infomation bar to show infomation!
+            // {background-color: red, position: fixed, top: 0, z-index: 500}
+            // maybe using components?
+            title: '网络错误，将加载缓存数据...',
+            icon: 'none',
+          })
+          let storedLectures = wx.getStorageSync("lectures")
+          if (storedLectures) {
+            that.setData({
+              lectures: storedLectures,
+            })
+          }
         }
       },
     })
