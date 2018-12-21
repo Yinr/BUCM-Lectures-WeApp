@@ -14,11 +14,11 @@
     </view>
     <view class='link-info-right'>
       <button class='link-btn btn-sign-up' size='mini' type='{{showSignIn ? "default" : "primary"}}' bindtap='gotoSignUpUrl' disabled='{{isOut}}'>报名</button>
-      <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' bindlongpress='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{showSignIn}}">签到</button>
+      <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{showSignIn}}">签到</button>
     </view>
   </view>
 
   <view class='qr-container' style='height: {{showQr ? "200px" : "0"}}; opacity: {{showQr ? 1 : 0}}; padding: {{showQr ? "" : 0}}'>
-    <image src='{{imagePath}}' class='qr-image' wx:if="{{showQr}}" bindtap='previewImg'></image>
+    <image src='{{imagePath}}' class='qr-image' wx:if="{{showQr}}" bindtap='previewImg' bindlongpress='gotoSignInUrl'></image>
   </view>
 </view>
