@@ -8,6 +8,13 @@ Component({
   properties: {
     lectInfo: {
       type: Object,
+      /**
+       * id: 讲座问卷星ID
+       * title: 讲座标题
+       * time: 讲座时间
+       * classroom: 讲座地点
+       * infoId: 讲座信息ID（秀米）
+       */
     },
     showSignIn: {
       type: Boolean,
@@ -113,6 +120,13 @@ Component({
       lectTime.setHours(lectTime.getHours(), lectTime.getMinutes() - 30);
       var now = new Date();
       return now >= lectTime && now <= lectEndTime;
+    },
+
+    longTapTime(e) {
+      let id = this.data.lectInfo.id
+      let eventDetail = { id }
+      let eventOption = {}
+      this.triggerEvent('addAttend', eventDetail, eventOption)
     },
 
     //点击图片进行预览，长按保存分享图片

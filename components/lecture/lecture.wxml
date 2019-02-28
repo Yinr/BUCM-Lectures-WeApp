@@ -2,7 +2,7 @@
 
 <view class='lecture-card {{isOut?"lecture-out":""}}'>
   <view class='top-info'>
-    <text class='time-info'>{{formatedTime}}</text>
+    <text class='time-info' bindlongpress='longTapTime'>{{formatedTime}}</text>
     <text class='class-info' bindtap='gotoClassroomUrl'>@{{lectInfo.classroom}}</text>
   </view>
 

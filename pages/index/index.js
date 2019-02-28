@@ -7,6 +7,10 @@ Page({
   data: {
     lectures: [],
     showSignIn: false,
+    user: {
+      nickName: "",
+      attended: []
+    },
     tmpCanvasId: "tmp-canvas",
     cavDisplay: false,
     cavW: 200,
@@ -118,21 +122,75 @@ Page({
   },
 
   login(e) {
-    var userInfo = e.detail.userInfo
-    var nickName = userInfo.nickName
-    this.updateUserInfo(nickName)
+    let that = this
+    let userInfo = e.detail.userInfo,
+      nickName = userInfo.nickName
+    that.updateUserInfo(nickName)
   },
   updateUserInfo(nickName) {
-    var that = this
-    var authUser = this.isAuthUser(nickName)
-    this.setData({
-      logined: true,
-      showSignIn: authUser,
+    let that = this
+    let authUser = that.isAuthUser(nickName)
+    wx.getStorage({
+      key: nickName,
+      success: function (res) {
+        that.setData({
+          'user': res.data,
+        })
+      },
+      complete(res) {
+        that.setData({
+          logined: true,
+          showSignIn: authUser,
+          'user.nickName': nickName,
+        })
+      }
     })
   },
   isAuthUser(nickName) {
-    let allowedUser = ['Yinr', '梳子Agnes', '梳几']
+    let allowedUser = ['Yinr', '梳子agnes', '张']
     return allowedUser.includes(nickName)
+  },
+  userConfig() {
+    return true
+  },
+
+  /**
+   * Attended info
+   */
+  addAttend(e) {
+    let that = this
+    let id = e.detail.id,
+      user = this.data.user
+    if (!user.attended.includes(id)) {
+      user.attended.push(id)
+      this.setData({
+        'user.attended': user.attended,
+      })
+      wx.setStorage({
+        key: user.nickName,
+        data: user,
+      })
+    }
+  },
+  cleanAttended(e) {
+    let that = this
+    let user = that.data.user
+    wx.showModal({
+      title: '清空数据确认',
+      content: '清空已参加讲座数据后将无法恢复，确认清空？',
+      success(res) {
+        if (res.confirm) {
+          that.setData({
+            'user.attended': []
+          })
+          user.attended = []
+          wx.setStorage({
+            key: that.data.user.nickName,
+            data: user,
+          })
+        }
+      }
+    })
   },
 
   updateFullTipText(text) {
