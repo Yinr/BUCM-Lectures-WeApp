@@ -2,15 +2,21 @@
 //获取应用实例
 const app = getApp()
 const QR = require("../../utils/qrcode.js")
+const cloudUtils = require("../../utils/cloudUtils.js")
 
 Page({
   data: {
     lectures: [],
-    showSignIn: false,
-    user: {
-      nickName: "",
-      attended: []
+    nickName: "",
+    userConfig: {
+      "admin": false,
+      "config": {
+        "alarm": false,
+        "alarm_time": 1,
+      },
+      "lectures": [],
     },
+
     tmpCanvasId: "tmp-canvas",
     cavDisplay: false,
     cavW: 200,
@@ -32,12 +38,15 @@ Page({
         })
       },
     })
+
+    // get login info
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success(res) {
-              that.updateUserInfo(res.userInfo.nickName)
+              let nickName = res.userInfo.nickName
+              that.updateUserInfo(nickName)
             }
           })
         }
@@ -129,47 +138,92 @@ Page({
   },
   updateUserInfo(nickName) {
     let that = this
-    let authUser = that.isAuthUser(nickName)
-    wx.getStorage({
-      key: nickName,
-      success: function (res) {
-        that.setData({
-          'user': res.data,
-        })
-      },
-      complete(res) {
-        that.setData({
-          logined: true,
-          showSignIn: authUser,
-          'user.nickName': nickName,
-        })
-      }
-    })
+
+    // get cloud user config
+    //TODO: add loading info
+    cloudUtils.getUserConfig().then((res) => {
+      let { admin, config, lectures } = res.data
+      that.setData({
+        userConfig: {
+          admin,
+          config,
+          lectures,
+          attended: lectures.filter(lect => lect.attended).length
+        },
+        logined: true,
+        nickName,
+      })
+    }).catch(console.error)
+
+    //TODO: add use of local storage
+    // wx.getStorage({
+    //   key: nickName,
+    //   success: function (res) {
+    //     that.setData({
+    //       'user': res.data,
+    //     })
+    //   },
+    //   complete(res) {
+    //     that.setData({
+    //       logined: true,
+    //       nickName,
+    //     })
+    //   }
+    // })
   },
-  isAuthUser(nickName) {
-    let allowedUser = ['Yinr', '梳子agnes', '张']
-    return allowedUser.includes(nickName)
+  triggerUpdateUserInfo(e) {
+    let that = this
+    cloudUtils.getUserConfig().then((res) => {
+      let { admin, config, lectures } = res.data
+      that.setData({
+        userConfig: {
+          admin,
+          config,
+          lectures,
+          attended: lectures.filter(lect => lect.attended).length
+        },
+      })
+    }).catch(console.log)
   },
   userConfig() {
+    //TODO: config view
     return true
   },
 
   /**
    * Attended info
    */
+  countAttend(newLectures = null) {
+    let { lectures, attended } = this.data.userConfig
+    if (newLectures) {
+      lectures = newLectures
+    }
+    let count = lectures.filter(lect => lect.attended).length
+    if (!(attended == count)) {
+      this.setData({
+        'userConfig.attended': count
+      })
+    }
+  },
   addAttend(e) {
     let that = this
     let id = e.detail.id,
-      user = this.data.user
-    if (!user.attended.includes(id)) {
-      user.attended.push(id)
+      { config, lectures } = this.data.userConfig
+    if (!lectures.map(x => x.id).includes(id)) {
+      let alarm_time = config.alarm ? config.alarm_time : -1
+      let attended = true
+      lectures.push({ id, alarm_time, attended })
       this.setData({
-        'user.attended': user.attended,
+        'userConfig.lectures': lectures,
       })
-      wx.setStorage({
-        key: user.nickName,
-        data: user,
-      })
+      cloudUtils.updateUserConfig({ config, lectures })
+      that.countAttend(lectures)
+      // this.pushConfig()
+
+      // wx.setStorage({
+      //   key: user.nickName,
+      //   data: user,
+      // })
     }
   },
   cleanAttended(e) {
@@ -181,13 +235,14 @@ Page({
       success(res) {
         if (res.confirm) {
           that.setData({
-            'user.attended': []
+            'userConfig.lectures': [],
+            'userConfig.attended': 0,
           })
-          user.attended = []
-          wx.setStorage({
-            key: that.data.user.nickName,
-            data: user,
-          })
+          cloudUtils.updateUserConfig({ lectures: [] })
+          // wx.setStorage({
+          //   key: that.data.user.nickName,
+          //   data: user,
+          // })
         }
       }
     })
@@ -204,5 +259,5 @@ Page({
     this.setData({
       fullTipText: selectedText,
     })
-  }
+  },
 })

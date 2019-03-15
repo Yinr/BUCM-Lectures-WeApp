@@ -16,7 +16,7 @@ Component({
        * infoId: 讲座信息ID（秀米）
        */
     },
-    showSignIn: {
+    admin: {
       type: Boolean,
       value: false,
     }

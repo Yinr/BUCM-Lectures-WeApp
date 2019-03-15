@@ -1,21 +1,26 @@
 <!--index.wxml-->
 <view class="container">
+
   <view class="top-info">
     <view class='logged-in' wx:if="{{logined}}">
-      <view class='user-info'>
+      <view class='user-info' bindlongpress='triggerUpdateUserInfo'>
         <open-data class="user-avatar" type="userAvatarUrl"></open-data>
         <open-data class="user-nickname" type="userNickName"></open-data>
       </view>
       <view class='config-info'>
-        <text class='attended-label' bindlongpress='cleanAttended'>{{user.attended.length}}</text>
+        <text class='attended-label' bindlongpress='cleanAttended'>{{userConfig.attended}}</text>
         <image class='config-button' src='/res/img/config.png' bindtap='userConfig'></image>
       </view>
     </view>
+
     <button class='login-button' wx:else type='primary' plain='true' open-type='getUserInfo' bindgetuserinfo='login'>登录</button>
   </view>
+
   <scroll-view class='lectures-list' scroll-y="true" enable-back-to-top="true" style='height: {{windowHeight}}px'>
     <view class='placeholder'></view>
-    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" showSignIn="{{showSignIn}}" bind:getQrUrl="qrUrl" bind:addAttend="addAttend" />
+
+    <lecture-item class="lecture" wx:for="{{lectures}}" wx:key="id" lectInfo="{{item}}" admin="{{userConfig.admin}}" bind:getQrUrl="qrUrl" bind:addAttend="addAttend" />
+
     <view class='bottom-tip'>
       <view wx:if="{{lectures.length == 0}}" class='no-data-tip'>
         <text>暂时没有找到讲座数据哦，下拉刷新一下？</text>
@@ -25,5 +30,7 @@
       </view>
     </view>
   </scroll-view>
+
   <canvas id="tmp-canvas" canvas-id='{{tmpCanvasId}}' wx:if='{{cavDisplay}}'></canvas>
+
 </view>
