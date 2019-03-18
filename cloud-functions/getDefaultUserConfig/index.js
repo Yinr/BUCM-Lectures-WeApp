@@ -18,5 +18,5 @@ exports.main = (event, context, callback) => {
 
   console.log({ OPENID, APPID, UNIONID })
 
-  return db.collection('default').doc("user-config").field(getFields).get()
+  return db.collection('admin_conf').doc("user-config").field(getFields).get()
 };

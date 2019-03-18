@@ -1,5 +1,6 @@
 // utils/components/lecture.js
-var utils = require("../../utils/util.js")
+let utils = require("../../utils/util.js")
+let cloudUtils = require('../../utils/cloudUtils.js')
 
 Component({
   /**
@@ -137,5 +138,27 @@ Component({
         urls: [img], // 需要预览的图片http链接列表
       })
     },
+
+    setAlarm(e) {
+      let that = this
+      console.log(e.detail.formId)
+      let alarm_time = new Date(that.data.lectInfo.time)
+      alarm_time = new Date()
+      alarm_time.setHours(alarm_time.getHours() + 2)
+      alarm_time.setHours(alarm_time.getHours() - 1)
+      cloudUtils.addQueue({
+        form_id: e.detail.formId,
+        lect_id: that.data.lectInfo.id,
+        alarm_time,
+      }).then(res => {
+        console.log(res)
+        wx.showToast({
+          title: '已成功设置提醒',
+          icon: 'success',
+          duration: 1500,
+          mask: false,
+        })
+      }).catch(console.error)
+    }
   }
 })

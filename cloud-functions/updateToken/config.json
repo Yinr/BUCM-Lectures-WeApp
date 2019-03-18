@@ -1,0 +1,9 @@
+{
+  "triggers": [
+    {
+      "name": "updateToken",
+      "type": "timer",
+      "config": "0 0 * * * * *"
+    }
+  ]
+}
