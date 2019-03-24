@@ -143,8 +143,6 @@ Component({
       let that = this
       console.log(e.detail.formId)
       let alarm_time = new Date(that.data.lectInfo.time)
-      alarm_time = new Date()
-      alarm_time.setHours(alarm_time.getHours() + 2)
       alarm_time.setHours(alarm_time.getHours() - 1)
       cloudUtils.addQueue({
         form_id: e.detail.formId,
