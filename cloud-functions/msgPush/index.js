@@ -86,7 +86,7 @@ function sendTemplateMessage(access_token, postData) {
 // 云函数入口函数
 exports.main = async (event, context) => {
   let now = new Date(), then = new Date()
-  then.setHours(then.getHours() + 1)
+  then.setMinutes(then.getMinutes() + 10)
 
   let ACC_TKN = await tknDoc.get().then((res) => {
     if (res.data.expires < now) {
@@ -97,7 +97,7 @@ exports.main = async (event, context) => {
 
   let queue = await queueDb.where({
     status: "pending",
-    alarm_time: _.and(_.gte(now), _.lte(then)),
+    alarm_time: _.lte(then)
   }).get().then(res => { return res.data }).catch(console.error)
 
   let pushed = 0, failed = 0, returns = []

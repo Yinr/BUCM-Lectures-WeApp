@@ -156,7 +156,17 @@ Component({
           duration: 1500,
           mask: false,
         })
-      }).catch(console.error)
+      }).catch(res => {
+        console.log({errCode: res.errCode, errMsg: res.errMsg })
+        if (res.errCode === -502001) {
+          wx.showToast({
+            title: '该项提醒已设置',
+            icon: 'none',
+            duration: 1500,
+            mask: false,
+          })
+        }
+      })
     }
   }
 })
