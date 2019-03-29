@@ -99,7 +99,7 @@ Component({
     },
     gotoClassroomUrl() {
       let url = 'https://class.yinr.cc/classroom/#' + this.data.lectInfo.classroom;
-      if (this.data.lectInfo.classroom.length == 0) {
+      if (this.data.lectInfo.classroom.length === 0) {
         url = "";
       } else {
         wx.showToast({

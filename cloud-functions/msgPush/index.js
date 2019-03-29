@@ -5,7 +5,7 @@ cloud.init()
 const db = cloud.database()
 const _ = db.command
 
-const APPID = "wx4e3abbd3ed7b61bb"
+const APPID = process.env.APPID
 
 /** 消息模板-课程即将开始
  * 
@@ -16,7 +16,7 @@ const APPID = "wx4e3abbd3ed7b61bb"
  *     温馨提示:  {{keyword5.DATA}}
  * 
  */
-const TEMPLATEID = "YtybbmoH6o3oOjn1ADo3nts1R3ouQOCuwMzDIO1NqMw"
+const TEMPLATEID = process.env.TEMPLATEID
 
 const tknDoc = db.collection("admin_conf").doc("access_token")
 const lecturesDb = db.collection("lectures")
@@ -102,11 +102,9 @@ exports.main = async (event, context) => {
 
   let pushed = 0, failed = 0, returns = []
 
-  // for (let q in queue) {
   for (let i = 0; i < queue.length; i++) {
     let { _id, _openid, alarm_time, form_id, lect_id } = queue[i]
 
-    // console.log({ _id, _openid, alarm_time, form_id, lect_id })
     let form_data = await lecturesDb.doc(lect_id).get().then(res => {
       return {
         keyword1: { value: res.data.title },

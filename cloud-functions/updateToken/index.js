@@ -4,14 +4,12 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 
 const adminConf = cloud.database().collection("admin_conf")
-const APPID = "wx4e3abbd3ed7b61bb"
-// const SECRET = ""
+const APPID = process.env.APPID
+const SECRET = process.env.SECRET
 const tknDoc = adminConf.doc("access_token")
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  let SECRET = await adminConf.doc('secret').get().then(res => res.data.secret)
-
   let options = {
     method: 'GET',
     url: 'https://api.weixin.qq.com/cgi-bin/token',
