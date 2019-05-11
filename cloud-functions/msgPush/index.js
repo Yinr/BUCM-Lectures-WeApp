@@ -103,12 +103,12 @@ exports.main = async (event, context) => {
   let pushed = 0, failed = 0, returns = []
 
   for (let i = 0; i < queue.length; i++) {
-    let { _id, _openid, alarm_time, form_id, lect_id } = queue[i]
+    let { _id, _openid, alarm_time, form_id, lect_id, teacher } = queue[i]
 
     let form_data = await lecturesDb.doc(lect_id).get().then(res => {
       return {
         keyword1: { value: res.data.title },
-        // keyword2: { value: "" },
+        keyword2: { value: teacher },
         keyword3: { value: lectTimeFmt(res.data.time) },
         keyword4: { value: res.data.classroom },
         // keyword5: { value: "" },
