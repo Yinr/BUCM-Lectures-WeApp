@@ -71,17 +71,24 @@ Page({
     wx.request({
       url: 'https://lectures.yinr.cc/data/lectures.json',
       success(res) {
-        let newLectures = res.data.sort(
-          (a, b) => (new Date(b.time)) - (new Date(a.time))
-        )
-        if (that.data.lectures != newLectures) {
-          that.setData({
-            lectures: newLectures,
-          })
-          wx.setStorage({
-            key: 'lectures',
-            data: newLectures,
-          })
+        if (res.statusCode === 200) {
+          let newLectures = res.data.sort(
+            (a, b) => (new Date(b.time)) - (new Date(a.time))
+          )
+          if (that.data.lectures != newLectures) {
+            that.setData({
+              lectures: newLectures,
+            })
+            wx.setStorage({
+              key: 'lectures',
+              data: newLectures,
+            })
+          } else {
+            console.warn({
+              errMsg: 'fail to get lectures.json',
+              res
+            })
+          }
         }
       },
       fail(res) {
