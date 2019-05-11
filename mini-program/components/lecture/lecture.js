@@ -32,6 +32,7 @@ Component({
     formatedTime: "",
     isDuring: false,
     isOut: false,
+    isInAlarm: false,
   },
 
   lifetimes: {
@@ -40,6 +41,7 @@ Component({
         formatedTime: utils.formatTime(new Date(this.data.lectInfo.time)),
         isDuring: this.isDuringTime(this.data.lectInfo.time),
         isOut: this.isOutTime(this.data.lectInfo.time),
+        inInAlarm: this.isInAlarmTime(this.data.lectInfo.time),
       })
     }
   },
@@ -121,6 +123,13 @@ Component({
       lectTime.setHours(lectTime.getHours(), lectTime.getMinutes() - 30);
       var now = new Date();
       return now >= lectTime && now <= lectEndTime;
+    },
+    isInAlarmTime(strTime) {
+      var lectTime = new Date(strTime);
+      var lectStartAlarmTime = new Date(lectTime);
+      lectStartAlarmTime.setDate(lectStartAlarmTime.getDate() - 7);
+      var now = new Date();
+      return now <= lectTime && now >= lectStartAlarmTime;
     },
 
     longTapTime(e) {

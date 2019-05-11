@@ -14,7 +14,7 @@
         <button class='link-btn btn-info' size='mini' plain bindtap='gotoInfoUrl'>详情</button>
       </view>
       <view class='link-info-right'>
-        <button class='link-btn btn-alarm' form-type='submit' size='mini' disabled='{{isOut}}'>提醒</button>
+        <button class='link-btn btn-alarm' form-type='submit' size='mini' disabled='{{!isInAlarmTime}}'>提醒</button>
         <button class='link-btn btn-sign-up' size='mini' type='{{admin ? "default" : "primary"}}' bindtap='gotoSignUpUrl' disabled='{{isOut}}'>报名</button>
         <button class='link-btn btn-sign-in' size='mini' type='primary' bindtap='gotoSignInUrl' disabled='{{!isDuring}}' wx:if="{{admin}}">签到</button>
       </view>
