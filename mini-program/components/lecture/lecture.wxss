@@ -40,16 +40,20 @@
   margin: 5px 10px;
 }
 
-.link-info button {
+.link-btn {
   padding: 0 30rpx;
 }
 
-.link-info-right button {
+.link-btn-right {
   margin-left: 14rpx;
 }
 
 .btn-alarm {
-  color: #00000099;
+  background-color: #ffffff00;
+}
+
+.btn-alarm::after {
+  border: none;
 }
 
 .btn-info {

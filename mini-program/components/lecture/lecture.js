@@ -41,7 +41,7 @@ Component({
         formatedTime: utils.formatTime(new Date(this.data.lectInfo.time)),
         isDuring: this.isDuringTime(this.data.lectInfo.time),
         isOut: this.isOutTime(this.data.lectInfo.time),
-        inInAlarm: this.isInAlarmTime(this.data.lectInfo.time),
+        isInAlarm: this.isInAlarmTime(this.data.lectInfo.time),
       })
     }
   },
