@@ -84,15 +84,18 @@ Component({
             const info = /injectedData.showInfo *= *JSON.parse\(decodeURIComponent\("([^"]*)"\)\);/
             var infoRes = info.exec(res.data)
             infoRes = JSON.parse(decodeURIComponent(infoRes[1]))
+            console.log(infoRes)
             var infoDesc = infoRes.desc
-            var infoUrl = "https:" + infoRes.show_data_url
 
             wx.showToast({
               title: infoDesc,
               icon: 'none',
             });
           } else {
-            console.log({ info: "lecture info request " + res.statusCode, err: res })
+            console.log({
+              info: "lecture info request " + res.statusCode,
+              err: res
+            })
           }
         },
       })
@@ -152,7 +155,7 @@ Component({
         let startAlarmTime = new Date(that.data.lectInfo.time)
         startAlarmTime.setDate(startAlarmTime.getDate() - 7)
         wx.showToast({
-          title: '由于微信限制，请于 ' + utils.formatTime( startAlarmTime) + '后再次尝试设置提醒',
+          title: '由于微信限制，请于 ' + utils.formatTime(startAlarmTime) + '后再次尝试设置提醒',
           icon: 'none',
           image: '',
           duration: 2000,
@@ -176,7 +179,7 @@ Component({
           mask: false,
         })
       }).catch(res => {
-        console.log({errCode: res.errCode, errMsg: res.errMsg })
+        console.log({ errCode: res.errCode, errMsg: res.errMsg })
         if (res.errCode === -502001) {
           wx.showToast({
             title: '该项提醒已设置',
