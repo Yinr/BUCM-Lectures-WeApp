@@ -94,6 +94,7 @@ function addQueue(data) {
         'lect_id': data.lect_id,
         'alarm_time': data.alarm_time,
         'status': 'pending',
+        'add_time': Date.now(),
       }
     })
   }
