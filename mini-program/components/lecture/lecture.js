@@ -32,7 +32,6 @@ Component({
     formatedTime: "",
     isDuring: false,
     isOut: false,
-    isInAlarm: false,
   },
 
   lifetimes: {
@@ -41,7 +40,6 @@ Component({
         formatedTime: utils.formatTime(new Date(this.data.lectInfo.time)),
         isDuring: this.isDuringTime(this.data.lectInfo.time),
         isOut: this.isOutTime(this.data.lectInfo.time),
-        isInAlarm: this.isInAlarmTime(this.data.lectInfo.time),
       })
     }
   },
@@ -150,6 +148,18 @@ Component({
 
     setAlarm(e) {
       let that = this
+      if (!that.isInAlarmTime(that.data.lectInfo.time)) {
+        let startAlarmTime = new Date(that.data.lectInfo.time)
+        startAlarmTime.setDate(startAlarmTime.getDate() - 7)
+        wx.showToast({
+          title: '由于微信限制，请于 ' + utils.formatTime( startAlarmTime) + '后再次尝试设置提醒',
+          icon: 'none',
+          image: '',
+          duration: 2000,
+          mask: true,
+        })
+        return false
+      }
       console.log(e.detail.formId)
       let alarm_time = new Date(that.data.lectInfo.time)
       alarm_time.setHours(alarm_time.getHours() - 1)
