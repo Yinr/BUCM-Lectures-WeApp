@@ -13,7 +13,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.7.2",
 	"appid": "wx4e3abbd3ed7b61bb",
 	"projectname": "bucm-lectures",
 	"miniprogramRoot": "mini-program/",
@@ -35,6 +35,10 @@
 			"list": []
 		},
 		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
 			"current": -1,
 			"list": []
 		},
